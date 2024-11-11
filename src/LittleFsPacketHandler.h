@@ -38,20 +38,22 @@ class LittleFsPacketHandler : public IPacketHandler {
         static constexpr Type RMDIR = 0x4a;   //!< Remove a directory.
     };
 
+    //! Error codes
     enum class Error : uint8_t {
-        NONE = 0,
-        UNABLE_TO_OPEN_FILE = 1,
-        WRITE_FAILED = 2,
-        READ_FAILED = 3,
-        SEEK_FAILED = 4,
-        FORMAT_FAILED = 5,
-        MKDIR_FAILED = 6,
-        RMDIR_FAILED = 7,
-        REMOVE_FAILED = 8,
+        NONE = 0,                 //!< No Error
+        UNABLE_TO_OPEN_FILE = 1,  //!< File doesn't exits
+        WRITE_FAILED = 2,         //!< Writing to a file failed.
+        READ_FAILED = 3,          //!< Reading from a file failed.
+        SEEK_FAILED = 4,          //!< Seeking to a position within a file failed.
+        FORMAT_FAILED = 5,        //!< Formatting the filesystem failed.
+        MKDIR_FAILED = 6,         //!< Creating a directory failed.
+        RMDIR_FAILED = 7,         //!< Removing a directory failed.
+        REMOVE_FAILED = 8,        //!< Remmoving a file failed.
     };
 
+    //! Flags for a directory entry
     struct Flags : public Bits<uint8_t> {
-        static constexpr Type DIR = 0x01;
+        static constexpr Type DIR = 0x01;  //!< Directory entry is a directory.
     };
 
     //! Response returned by INFO command.
@@ -60,10 +62,19 @@ class LittleFsPacketHandler : public IPacketHandler {
         uint32_t usedBytes;   //!< Number of used bytes in the file system.
     };
 
-    bool handlePacket(Packet const& cmd, Packet* rsp) override;
+    //! Function called to handle an incoming packet.
+    //! @returns true if the packet was handled, false if it wasn't.
+    bool handlePacket(
+        Packet const& cmd,  //!< [in] Packet that was received.
+        Packet* rsp         //!< [out] Place to store response.
+        ) override;
 
-    char const* as_str(Packet::Command::Type cmd) const override;
+    //! Converts a command into it's string representation.
+    //! @returns a pointer to literal string.
+    char const* as_str(Packet::Command::Type cmd  //!< The command tp lookup.
+    ) const override;
 
+ private:
     //! Handles the COPY command
     void handleCopy(
         Packet const& cmd,  //!< [in] Ping packet.
