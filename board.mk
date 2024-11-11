@@ -1,0 +1,1 @@
+BOARD = esp32thing
