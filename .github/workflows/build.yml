@@ -25,6 +25,12 @@ jobs:
         repository: dhylands/duino_bus
         path: libraries/duino_bus
 
+    - name: Checkout duino_led
+      uses: actions/checkout@v4
+      with:
+        repository: dhylands/duino_led
+        path: libraries/duino_led
+
     - name: Checkout duino_log
       uses: actions/checkout@v4
       with:
