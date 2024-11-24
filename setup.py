@@ -44,7 +44,7 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-            'duino_cli',
+        'duino_cli',
     ],
     entry_points={
         'duino_cli.plugin':

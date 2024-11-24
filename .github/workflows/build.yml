@@ -1,4 +1,4 @@
-name: Build Actions for duino_littlefs
+name: Build duino_littlefs
 
 on: [push, pull_request]
 
@@ -50,13 +50,13 @@ jobs:
         path: libraries/duino_makefile
 
     - name: Install tools
-      run: make BOARD=pico install-tools
+      run: make install-tools
 
     - name: Run tools (test-style, lint, docs, unittest, coverage)
-      run: make BOARD=pico run-tools
+      run: make run-tools
 
     - name: Install Arduino library dependencies
-      run: make BOARD=pico install-deps
+      run: make BOARD=esp32thing install-deps
 
     - name: Make sure all of the examples compile
-      run: make BOARD=pico compile-examples
+      run: make BOARD=esp32thing compile-examples
