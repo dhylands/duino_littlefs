@@ -43,6 +43,9 @@ setup(
         'Topic :: Terminals :: Serial',
         'Topic :: Utilities',
     ],
+    install_requires=[
+            'duino_cli',
+    ],
     entry_points={
         'duino_cli.plugin':
         ['littlefs=duino_littlefs.duino_littlefs:LittleFsPlugin'],
